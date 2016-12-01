@@ -2,6 +2,10 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 #endif
+#if NET_35
+using System.Collections.Generic;
+using System.Threading.Tasks;
+#endif
 
 namespace Octokit
 {

@@ -53,14 +53,14 @@ namespace Octokit
         /// <remarks>
         /// Only users with push access can set labels for new issues. Labels are silently dropped otherwise.
         /// </remarks>
-        public Collection<string> Labels { get; private set; }
+        public System.Collections.ObjectModel.Collection<string> Labels { get; private set; }
 
         internal string DebuggerDisplay
         {
             get
             {
                 var labels = Labels ?? new Collection<string>();
-                return string.Format(CultureInfo.InvariantCulture, "Title: {0} Labels: {1}", Title, string.Join(",", labels));
+                return string.Format(CultureInfo.InvariantCulture, "Title: {0} Labels: {1}", Title, labels.Join(","));
             }
         }
     }

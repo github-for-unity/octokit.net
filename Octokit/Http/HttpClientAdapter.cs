@@ -57,12 +57,42 @@ namespace Octokit.Internal
 
             if (request.Timeout != TimeSpan.Zero)
             {
-                var timeoutCancellation = new CancellationTokenSource(request.Timeout);
+                var timeoutCancellation = new CancellationTokenSource();
+                var timerCallback = new TimerCallback(TimerCallbackLogic);
                 var unifiedCancellationToken = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeoutCancellation.Token);
 
                 cancellationTokenForRequest = unifiedCancellationToken.Token;
             }
             return cancellationTokenForRequest;
+        }
+
+        static void TimerCallbackLogic(object obj)
+        {
+            CancellationTokenSource cts = (CancellationTokenSource)obj;
+#if NET_35
+            var isDisposed = cts.IsDisposed();
+#else
+            var isDisposed = cts.IsDisposed;
+#endif
+            // Cancel the source; handle a race condition with cts.Dispose()
+            if (!isDisposed)
+            {
+                // There is a small window for a race condition where a cts.Dispose can sneak
+                // in right here.  I'll wrap the cts.Cancel() in a try/catch to proof us
+                // against this ----.
+                try
+                {
+                    cts.Cancel(); // will take care of disposing of m_timer
+                }
+                catch (ObjectDisposedException)
+                {
+#if NET_35
+                    isDisposed = cts.IsDisposed();
+#endif
+                    // If the ODE was not due to the target cts being disposed, then propagate the ODE.
+                    if (!isDisposed) throw;
+                }
+            }
         }
 
         protected virtual async Task<IResponse> BuildResponse(HttpResponseMessage responseMessage)

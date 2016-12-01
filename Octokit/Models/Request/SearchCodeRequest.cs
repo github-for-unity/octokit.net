@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -151,12 +150,12 @@ namespace Octokit
         [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "System.String.ToLower")]
         public override IReadOnlyList<string> MergedQualifiers()
         {
-            var parameters = new List<string>();
+            var parameters = new Net40List<string>();
 
             if (In != null)
             {
                 parameters.Add(string.Format(CultureInfo.InvariantCulture, "in:{0}",
-                    string.Join(",", In.Select(i => i.ToParameter()))));
+                    In.Select(i => i.ToParameter()).Join(",")));
             }
 
             if (Language != null)
@@ -205,7 +204,7 @@ namespace Octokit
                 }
 
                 parameters.Add(
-                    string.Join("+", Repos.Select(x => "repo:" + x)));
+                    string.Join("+", Repos.Select(x => "repo:" + x).ToArray()));
             }
 
             return new ReadOnlyCollection<string>(parameters);

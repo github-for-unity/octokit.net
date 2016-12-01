@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 #endif
+#if NET_35
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
+#endif
 
 namespace Octokit
 {

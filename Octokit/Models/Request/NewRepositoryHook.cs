@@ -109,7 +109,7 @@ namespace Octokit
             get
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Repository Hook: Name: {0}, Events: {1}", Name, string.Join(", ", Events));
+                    "Repository Hook: Name: {0}, Events: {1}", Name, Events.Join(", "));
             }
         }
     }

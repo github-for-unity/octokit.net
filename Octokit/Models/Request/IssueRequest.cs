@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using Octokit.Internal;
+using System.Collections.ObjectModel;
 
 namespace Octokit
 {
@@ -47,7 +47,7 @@ namespace Octokit
         /// <value>
         /// The labels.
         /// </value>
-        public Collection<string> Labels { get; private set; }
+        public System.Collections.ObjectModel.Collection<string> Labels { get; private set; }
 
         /// <summary>
         /// Gets or sets the <see cref="IssueSort"/> property to sort the returned issues by.

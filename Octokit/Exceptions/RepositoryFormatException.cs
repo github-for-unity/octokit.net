@@ -17,7 +17,7 @@ namespace Octokit
 
         public RepositoryFormatException(IEnumerable<string> invalidRepositories)
         {
-            var parameterList = string.Join(", ", invalidRepositories);
+            var parameterList = invalidRepositories.Join(", ");
             message = string.Format(
                 CultureInfo.InvariantCulture,
                 "The list of repositories must be formatted as 'owner/name' - these values don't match this rule: {0}",

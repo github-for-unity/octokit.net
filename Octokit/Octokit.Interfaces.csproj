@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{227995E0-1876-4CDA-AB0E-D281521A0C33}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Octokit.Interfaces</RootNamespace>
+    <AssemblyName>Octokit.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Rackspace.Threading, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bb62785d398726f0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\Rackspace.Threading.2.0.0-alpha001\lib\net35-client\Rackspace.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReadOnlyCollectionsInterfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\ReadOnlyCollectionInterfaces.1.0.0\lib\NET20\ReadOnlyCollectionsInterfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c2814533e73a79ce, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\Rackspace.HttpClient35.1.0.0-beta003\lib\net35\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\src\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Clients\ICommitsClient.cs" />
+    <Compile Include="Clients\IActivitiesClient.cs" />
+    <Compile Include="Clients\IBlobsClient.cs" />
+    <Compile Include="Clients\ICommitStatusClient.cs" />
+    <Compile Include="Clients\IEventsClient.cs" />
+    <Compile Include="Clients\IFeedsClient.cs" />
+    <Compile Include="Clients\IGistsClient.cs" />
+    <Compile Include="Clients\IGitDatabaseClient.cs" />
+    <Compile Include="Clients\IIssueCommentsClient.cs" />
+    <Compile Include="Clients\IIssuesEventsClient.cs" />
+    <Compile Include="Clients\IIssuesLabelsClient.cs" />
+    <Compile Include="Clients\IMergingClient.cs" />
+    <Compile Include="Clients\IOrganizationMembersClient.cs" />
+    <Compile Include="Clients\IReferencesClient.cs" />
+    <Compile Include="Clients\IPullRequestsClient.cs" />
+    <Compile Include="Clients\IRepositoryForksClient.cs" />
+    <Compile Include="Clients\IRepositoryHooksClient.cs" />
+    <Compile Include="Clients\IRepositoryPagesClient.cs" />
+    <Compile Include="Clients\IUserAdministrationClient.cs" />
+    <Compile Include="Clients\IStarredClient.cs" />
+    <Compile Include="Clients\IStatisticsClient.cs" />
+    <Compile Include="Clients\ITagsClient.cs" />
+    <Compile Include="Clients\ITreesClient.cs" />
+    <Compile Include="Clients\ITeamsClient.cs" />
+    <Compile Include="Clients\IWatchedClient.cs" />
+    <Compile Include="Clients\IAssigneesClient.cs" />
+    <Compile Include="Clients\IIssuesClient.cs" />
+    <Compile Include="Clients\IMilestonesClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Authentication\IAuthenticationHandler.cs" />
+    <Compile Include="Http\ICredentialStore.cs" />
+    <Compile Include="Helpers\IApiPagination.cs" />
+    <Compile Include="Clients\IAuthorizationsClient.cs" />
+    <Compile Include="IGitHubClient.cs" />
+    <Compile Include="Clients\IMiscellaneousClient.cs" />
+    <Compile Include="Clients\IReleasesClient.cs" />
+    <Compile Include="Clients\INotificationsClient.cs" />
+    <Compile Include="Clients\IOrganizationsClient.cs" />
+    <Compile Include="Helpers\IReadOnlyPagedCollection.cs" />
+    <Compile Include="Clients\IRepositoriesClient.cs" />
+    <Compile Include="Clients\IUsersClient.cs" />
+    <Compile Include="Http\IJsonSerializer.cs" />
+    <Compile Include="Http\IConnection.cs" />
+    <Compile Include="Http\IRequest.cs" />
+    <Compile Include="Http\IResponse.cs" />
+    <Compile Include="Clients\ISearchClient.cs" />
+    <Compile Include="Clients\IRepoCollaboratorsClient.cs" />
+    <Compile Include="Clients\IPullRequestReviewCommentsClient.cs" />
+    <Compile Include="Clients\IGistCommentsClient.cs" />
+    <Compile Include="Clients\IDeploymentsClient.cs" />
+    <Compile Include="Clients\IDeploymentStatusClient.cs" />
+    <Compile Include="Clients\IUserEmailsClient.cs" />
+    <Compile Include="Clients\IFollowersClient.cs" />
+    <Compile Include="Clients\IRepositoryCommentsClient.cs" />
+    <Compile Include="Clients\IRepositoryCommitsClient.cs" />
+    <Compile Include="Clients\IOAuthClient.cs" />
+    <Compile Include="Clients\IRepositoryDeployKeysClient.cs" />
+    <Compile Include="Clients\IUserKeysClient.cs" />
+    <Compile Include="Clients\IRepositoryContentsClient.cs" />
+    <Compile Include="Http\IApiInfoProvider.cs" />
+    <Compile Include="Clients\Enterprise\IEnterpriseAdminStatsClient.cs" />
+    <Compile Include="Clients\Enterprise\IEnterpriseClient.cs" />
+    <Compile Include="Clients\Enterprise\IEnterpriseLicenseClient.cs" />
+    <Compile Include="Clients\Enterprise\IEnterpriseOrganizationClient.cs" />
+    <Compile Include="Clients\Enterprise\IEnterpriseSearchIndexingClient.cs" />
+    <Compile Include="Clients\Enterprise\IEnterpriseLdapClient.cs" />
+    <Compile Include="Clients\IMigrationClient.cs" />
+    <Compile Include="Clients\IMigrationsClient.cs" />
+    <Compile Include="Clients\IReactionsClient.cs" />
+    <Compile Include="Clients\ICommitCommentReactionsClient.cs" />
+    <Compile Include="Clients\IIssueReactionsClient.cs" />
+    <Compile Include="Clients\IssueReactionsClient.cs" />
+    <Compile Include="Clients\IIssueCommentReactionsClient.cs" />
+    <Compile Include="Clients\IssueCommentReactionsClient.cs" />
+    <Compile Include="Clients\IPullRequestReviewCommentReactionsClient.cs" />
+    <Compile Include="Clients\IUserGpgKeysClient.cs" />
+    <Compile Include="Clients\Enterprise\IEnterpriseProbe.cs" />
+    <Compile Include="Clients\IRepositoryInvitationsClient.cs" />
+    <Compile Include="Models\Request\InvitationUpdate.cs" />
+    <Compile Include="Clients\IIssueTimelineClient.cs" />
+    <Compile Include="Clients\IRepositoryBranchesClient.cs" />
+    <Compile Include="Clients\IRepositoryTrafficClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

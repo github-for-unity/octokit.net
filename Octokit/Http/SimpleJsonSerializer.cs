@@ -23,7 +23,7 @@ namespace Octokit.Internal
 
         class GitHubSerializerStrategy : PocoJsonSerializerStrategy
         {
-            readonly List<string> _membersWhichShouldPublishNull = new List<string>();
+            readonly Net40List<string> _membersWhichShouldPublishNull = new Net40List<string>();
             Dictionary<Type, Dictionary<object, object>> _cachedEnums = new Dictionary<Type, Dictionary<object, object>>();
 
             protected override string MapClrMemberToJsonFieldName(MemberInfo member)

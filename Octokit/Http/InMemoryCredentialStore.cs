@@ -1,4 +1,7 @@
 ﻿using System.Threading.Tasks;
+#if !NET_35
+using TaskEx=System.Threading.Tasks.Task;
+#endif
 
 namespace Octokit.Internal
 {
@@ -26,7 +29,7 @@ namespace Octokit.Internal
         /// <returns>A continuation containing credentials</returns>
         public Task<Credentials> GetCredentials()
         {
-            return Task.FromResult(_credentials);
+            return TaskEx.FromResult(_credentials);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -174,7 +173,7 @@ namespace Octokit
                     "IncludeAdmins: {0} Strict: {1} Contexts: {2}",
                     IncludeAdmins, 
                     Strict, 
-                    Contexts == null ? "" : String.Join(",", Contexts));
+                    Contexts == null ? "" : Contexts.Join(","));
             }
         }
     }
@@ -209,8 +208,8 @@ namespace Octokit
             {
                 return string.Format(CultureInfo.InvariantCulture, 
                     "Teams: {0} Users: {1}",
-                    Teams == null ? "" : String.Join(",", Teams),
-                    Users == null ? "" : String.Join(",", Users));
+                    Teams == null ? "" : Teams.Join(","),
+                    Users == null ? "" : Users.Join(","));
             }
         }
     }

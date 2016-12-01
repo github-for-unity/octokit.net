@@ -55,7 +55,7 @@ namespace Octokit
 
             Func<string, string, string> mapValueFunc = (key, value) => key == "q" ? value : Uri.EscapeDataString(value);
 
-            string query = string.Join("&", p.Select(kvp => kvp.Key + "=" + mapValueFunc(kvp.Key, kvp.Value)));
+            string query = p.Select(kvp => kvp.Key + "=" + mapValueFunc(kvp.Key, kvp.Value)).Join("&");
             if (uri.IsAbsoluteUri)
             {
                 var uriBuilder = new UriBuilder(uri)

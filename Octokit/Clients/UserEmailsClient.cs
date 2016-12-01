@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+#if NET_45
+using StringExt = System.String;
+#endif
+#if NET_35
+using StringExt = GitHub.Extensions.StringExtensions;
+#endif
 
 namespace Octokit
 {
@@ -58,7 +64,7 @@ namespace Octokit
         public Task<IReadOnlyList<EmailAddress>> Add(params string[] emailAddresses)
         {
             Ensure.ArgumentNotNull(emailAddresses, "emailAddresses");
-            if (emailAddresses.Any(string.IsNullOrWhiteSpace))
+            if (emailAddresses.Any(StringExt.IsNullOrWhiteSpace))
                 throw new ArgumentException("Cannot contain null, empty or whitespace values", "emailAddresses");
 
             return ApiConnection.Post<IReadOnlyList<EmailAddress>>(ApiUrls.Emails(), emailAddresses);
@@ -75,7 +81,7 @@ namespace Octokit
         public Task Delete(params string[] emailAddresses)
         {
             Ensure.ArgumentNotNull(emailAddresses, "emailAddresses");
-            if (emailAddresses.Any(string.IsNullOrWhiteSpace))
+            if (emailAddresses.Any(StringExt.IsNullOrWhiteSpace))
                 throw new ArgumentException("Cannot contain null, empty or whitespace values", "emailAddresses");
 
             return ApiConnection.Delete(ApiUrls.Emails(), emailAddresses);

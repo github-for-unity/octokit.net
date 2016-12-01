@@ -1,6 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
+#if NET_45
+using StringExt = System.String;
+#endif
+#if NET_35
+using StringExt = GitHub.Extensions.StringExtensions;
+#endif
 
 namespace Octokit
 {
@@ -84,7 +91,7 @@ namespace Octokit
         {
             get
             {
-                var mergedParameters = string.Join("+", MergedQualifiers());
+                var mergedParameters = string.Join("+", MergedQualifiers().ToArray());
                 if (string.IsNullOrEmpty(Term))
                 {
                     return mergedParameters;
@@ -110,7 +117,7 @@ namespace Octokit
                     , { "order", SortOrder }
                     , { "q", TermAndQualifiers }
                 };
-                if (!string.IsNullOrWhiteSpace(Sort))
+                if (!StringExt.IsNullOrWhiteSpace(Sort))
                 {
                     d.Add("sort", Sort);
                 }

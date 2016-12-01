@@ -63,7 +63,7 @@ namespace Octokit
                 throw new FormatException("Reference must start with 'refs' and have at least two slashes.");
             }
 
-            return string.Join("/", parts);
+            return parts.Join("/");
         }
 
         internal string DebuggerDisplay

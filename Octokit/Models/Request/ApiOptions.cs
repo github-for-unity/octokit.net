@@ -37,7 +37,7 @@ namespace Octokit
         {
             get
             {
-                var values = new List<string>();
+                var values = new Net40List<string>();
 
                 if (StartPage.HasValue)
                 {
@@ -54,7 +54,7 @@ namespace Octokit
                     values.Add("PageSize: " + PageSize.Value);
                 }
 
-                return String.Join(", ", values);
+                return values.Join(", ");
             }
         }
     }

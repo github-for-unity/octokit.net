@@ -52,7 +52,7 @@ namespace Octokit
             get
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Repository Hook: Name: {0} Url: {1}, Events: {2}", Name, Url, string.Join(", ", Events));
+                    "Repository Hook: Name: {0} Url: {1}, Events: {2}", Name, Url, Events.Join(", "));
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Octokit.Internal;
@@ -54,7 +53,7 @@ namespace Octokit
         /// The required contexts.
         /// </value>
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public Collection<string> RequiredContexts { get; set; }
+        public System.Collections.ObjectModel.Collection<string> RequiredContexts { get; set; }
 
         /// <summary>
         /// JSON payload with extra information about the deployment.

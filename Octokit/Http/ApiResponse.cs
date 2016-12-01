@@ -1,4 +1,6 @@
-﻿namespace Octokit.Internal
+﻿using System;
+
+namespace Octokit.Internal
 {
     /// <summary>
     /// Wrapper for a response from the API

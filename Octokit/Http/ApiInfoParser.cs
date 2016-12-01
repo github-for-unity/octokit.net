@@ -22,8 +22,8 @@ namespace Octokit.Internal
             Ensure.ArgumentNotNull(responseHeaders, "responseHeaders");
 
             var httpLinks = new Dictionary<string, Uri>();
-            var oauthScopes = new List<string>();
-            var acceptedOauthScopes = new List<string>();
+            var oauthScopes = new Net40List<string>();
+            var acceptedOauthScopes = new Net40List<string>();
             string etag = null;
 
             if (responseHeaders.ContainsKey("X-Accepted-OAuth-Scopes"))

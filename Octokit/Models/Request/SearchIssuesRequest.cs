@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -266,7 +265,7 @@ namespace Octokit
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override IReadOnlyList<string> MergedQualifiers()
         {
-            var parameters = new List<string>();
+            var parameters = new Net40List<string>();
 
             if (Type != null)
             {
@@ -277,7 +276,7 @@ namespace Octokit
             if (In != null)
             {
                 parameters.Add(string.Format(CultureInfo.InvariantCulture, "in:{0}",
-                    string.Join(",", In.Select(i => i.ToParameter()))));
+                    string.Join(",", In.Select(i => i.ToParameter()).ToArray())));
             }
 
             if (Author.IsNotBlank())
@@ -404,7 +403,7 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "Search: {0} {1}", Term, string.Join(" ", MergedQualifiers()));
+                return string.Format(CultureInfo.InvariantCulture, "Search: {0} {1}", Term, MergedQualifiers().Join(" "));
             }
         }
     }
@@ -482,7 +481,7 @@ namespace Octokit
     }
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class RepositoryCollection : Collection<string>
+    public class RepositoryCollection : System.Collections.ObjectModel.Collection<string>
     {
         public void Add(string owner, string name)
         {

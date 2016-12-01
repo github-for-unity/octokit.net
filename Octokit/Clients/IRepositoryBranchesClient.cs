@@ -1,8 +1,11 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 #if NET_45
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+#endif
+#if NET_35
 using System.Collections.Generic;
 #endif
 

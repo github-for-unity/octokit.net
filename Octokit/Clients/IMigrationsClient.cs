@@ -35,7 +35,7 @@ namespace Octokit
         /// </remarks>
         /// <param name="org">The organization of which to list migrations.</param>
         /// <returns>List of most recent <see cref="Migration"/>s.</returns>
-        Task<List<Migration>> GetAll(
+        Task<Net40List<Migration>> GetAll(
             string org);
 
         /// <summary>

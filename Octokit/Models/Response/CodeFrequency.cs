@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -12,6 +11,8 @@ namespace Octokit
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class CodeFrequency
     {
+        private IReadOnlyList<long[]> rawFrequencies;
+
         public CodeFrequency() { }
 
         public CodeFrequency(IEnumerable<AdditionsAndDeletions> additionsAndDeletionsByWeek)
@@ -28,8 +29,15 @@ namespace Octokit
         public CodeFrequency(IEnumerable<IList<long>> rawFrequencies)
         {
             Ensure.ArgumentNotNull(rawFrequencies, "rawFrequencies");
-            AdditionsAndDeletionsByWeek = rawFrequencies.Select(point => new AdditionsAndDeletions(point)).ToList();
+            AdditionsAndDeletionsByWeek = rawFrequencies.Select(point => new AdditionsAndDeletions(point)).ToReadOnlyList();
         }
+
+#if NET_35
+        public CodeFrequency(IReadOnlyList<long[]> rawFrequencies)
+        {
+            this.rawFrequencies = rawFrequencies;
+        }
+#endif
 
         /// <summary>
         /// A weekly aggregate of the number of additions and deletions pushed to a repository.

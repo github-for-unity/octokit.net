@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -554,10 +553,10 @@ namespace Octokit
         {
             Ensure.ArgumentNotNull(uri, "uri");
 
-            var response = await Connection.Get<List<T>>(uri, parameters, accepts).ConfigureAwait(false);
+            var response = await Connection.Get<Net40List<T>>(uri, parameters, accepts).ConfigureAwait(false);
             return new ReadOnlyPagedCollection<T>(
                 response,
-                nextPageUri => Connection.Get<List<T>>(nextPageUri, parameters, accepts));
+                nextPageUri => Connection.Get<Net40List<T>>(nextPageUri, parameters, accepts));
         }
 
         async Task<IReadOnlyPagedCollection<TU>> GetPage<TU>(
@@ -570,7 +569,7 @@ namespace Octokit
 
             var connection = Connection;
 
-            var response = await connection.Get<List<TU>>(uri, parameters, accepts).ConfigureAwait(false);
+            var response = await connection.Get<Net40List<TU>>(uri, parameters, accepts).ConfigureAwait(false);
             return new ReadOnlyPagedCollection<TU>(
                 response,
                 nextPageUri =>
@@ -580,7 +579,7 @@ namespace Octokit
                         options);
 
                     return shouldContinue
-                        ? connection.Get<List<TU>>(nextPageUri, parameters, accepts)
+                        ? connection.Get<Net40List<TU>>(nextPageUri, parameters, accepts)
                         : null;
                 });
         }

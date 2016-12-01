@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using Octokit.Internal;
+using System.Collections.ObjectModel;
 
 namespace Octokit
 {
@@ -51,7 +51,7 @@ namespace Octokit
         /// information about scopes.
         /// </remarks>
         [Parameter(Key = "scope")]
-        public Collection<string> Scopes { get; private set; }
+        public System.Collections.ObjectModel.Collection<string> Scopes { get; private set; }
 
         /// <summary>
         /// An unguessable random string. It is used to protect against cross-site request forgery attacks. In ASP.NET

@@ -30,7 +30,7 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "Scopes: {0}", string.Join("\r\n", Scopes));
+                return string.Format(CultureInfo.InvariantCulture, "Scopes: {0}", Scopes.Join("\r\n"));
             }
         }
     }

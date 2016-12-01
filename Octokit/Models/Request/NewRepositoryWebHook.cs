@@ -118,7 +118,8 @@ namespace Octokit
 
             var config = webHookConfig
                 .Union(Config, new WebHookConfigComparer())
-                .ToDictionary(k => k.Key, v => v.Value);
+                .ToDictionary(k => k.Key, v => v.Value)
+                .ToReadOnlyDictionary();
 
             return new NewRepositoryHook(Name, config);
         }

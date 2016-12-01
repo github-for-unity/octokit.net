@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Threading.Tasks;
 #if NET_45
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+#endif
+#if NET_35
+using System.Collections.Generic;
+using System.Threading.Tasks;
 #endif
 
 namespace Octokit
@@ -24,7 +27,7 @@ namespace Octokit
             {
                 var page = await getFirstPage().ConfigureAwait(false);
 
-                var allItems = new List<T>(page);
+                var allItems = new Net40List<T>(page);
                 while ((page = await page.GetNextPage().ConfigureAwait(false)) != null)
                 {
                     allItems.AddRange(page);

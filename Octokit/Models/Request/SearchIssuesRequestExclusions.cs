@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -125,7 +124,7 @@ namespace Octokit
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public IReadOnlyList<string> MergedQualifiers()
         {
-            var parameters = new List<string>();
+            var parameters = new Net40List<string>();
 
             if (Author.IsNotBlank())
             {
@@ -189,7 +188,7 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "Exclusions: {0}", string.Join(" ", MergedQualifiers()));
+                return string.Format(CultureInfo.InvariantCulture, "Exclusions: {0}", MergedQualifiers().Join(" "));
             }
         }
     }

@@ -57,7 +57,7 @@ namespace Octokit
         {
             get
             {
-                var propValues = new List<string>();
+                var propValues = new Net40List<string>();
                 if (Type.HasValue)
                     propValues.Add(string.Format(CultureInfo.InvariantCulture, "Type: {0}", Type));
                 if (Sort.HasValue)
@@ -69,7 +69,7 @@ namespace Octokit
                 if (Affiliation.HasValue)
                     propValues.Add(string.Format(CultureInfo.InvariantCulture, "Affiliation: {0}", Affiliation));
 
-                return string.Join(", ", propValues);
+                return propValues.Join(", ");
             }
         }
     }

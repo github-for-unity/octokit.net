@@ -114,11 +114,11 @@ namespace Octokit
 
         public override IReadOnlyList<string> MergedQualifiers()
         {
-            var parameters = new List<string>();
+            var parameters = new Net40List<string>();
 
             if (In != null)
             {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "in:{0}", string.Join(",", In)));
+                parameters.Add(string.Format(CultureInfo.InvariantCulture, "in:{0}", In.Join(",")));
             }
 
             if (Size != null)

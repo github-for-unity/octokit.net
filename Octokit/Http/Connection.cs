@@ -658,7 +658,7 @@ namespace Octokit
 #else
                 Environment.OSVersion.Platform,
                 Environment.OSVersion.Version.ToString(3),
-                Environment.Is64BitOperatingSystem ? "amd64" : "x86",
+                "mono35",
 #endif
                 CultureInfo.CurrentCulture.Name,
                 AssemblyVersionInformation.Version);

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -92,7 +91,7 @@ namespace Octokit
 
         public override IReadOnlyList<string> MergedQualifiers()
         {
-            var parameters = new List<string>();
+            var parameters = new Net40List<string>();
 
             if (AccountType != null)
             {
@@ -101,7 +100,7 @@ namespace Octokit
 
             if (In != null)
             {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "in:{0}", string.Join(",", In)));
+                parameters.Add(string.Format(CultureInfo.InvariantCulture, "in:{0}", In.Join(",")));
             }
 
             if (Repositories != null)

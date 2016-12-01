@@ -6,6 +6,13 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+#if NET_45
+using StringExt = System.String;
+#endif
+#if NET_35
+using StringExt = GitHub.Extensions.StringExtensions;
+using System.Web;
+#endif
 
 namespace Octokit
 {
@@ -13,12 +20,12 @@ namespace Octokit
     {
         public static bool IsBlank(this string value)
         {
-            return string.IsNullOrWhiteSpace(value);
+            return StringExt.IsNullOrWhiteSpace(value);
         }
 
         public static bool IsNotBlank(this string value)
         {
-            return !string.IsNullOrWhiteSpace(value);
+            return !StringExt.IsNullOrWhiteSpace(value);
         }
 
         public static Uri FormatUri(this string pattern, params object[] args)
@@ -30,7 +37,11 @@ namespace Octokit
 
         public static string UriEncode(this string input)
         {
+#if NET_35
+            return HttpUtility.UrlEncode(input);
+#else
             return WebUtility.UrlEncode(input);
+#endif
         }
 
         public static string ToBase64String(this string input)
@@ -58,7 +69,7 @@ namespace Octokit
                     var parameterProperty = values.GetType().GetProperty(parameter);
                     if (parameterProperty != null)
                     {
-                        expansion += string.IsNullOrWhiteSpace(expansion) ? "?" : "&";
+                        expansion += StringExt.IsNullOrWhiteSpace(expansion) ? "?" : "&";
                         expansion += parameter + "=" +
                             Uri.EscapeDataString("" + parameterProperty.GetValue(values, new object[0]));
                     }
@@ -81,13 +92,13 @@ namespace Octokit
         public static string ToRubyCase(this string propertyName)
         {
             Ensure.ArgumentNotNullOrEmptyString(propertyName, "s");
-            return string.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
+            return propertyName.SplitUpperCase().Join("_").ToLowerInvariant();
         }
 
         public static string FromRubyCase(this string propertyName)
         {
             Ensure.ArgumentNotNullOrEmptyString(propertyName, "s");
-            return string.Join("", propertyName.Split('_')).ToCapitalizedInvariant();
+            return propertyName.Split('_').Join("").ToCapitalizedInvariant();
         }
 
         public static string ToCapitalizedInvariant(this string value)

@@ -2,6 +2,11 @@
 using System.Threading.Tasks;
 #if NET_45
 using System.Collections.Generic;
+using StringExt = System.String;
+#endif
+#if NET_35
+using System.Collections.Generic;
+using StringExt = GitHub.Extensions.StringExtensions;
 #endif
 
 namespace Octokit
@@ -129,10 +134,10 @@ namespace Octokit
             Ensure.ArgumentNotNullOrEmptyString(name, "name");
             Ensure.ArgumentNotNull(newDeployKey, "newDeployKey");
 
-            if (string.IsNullOrWhiteSpace(newDeployKey.Title))
+            if (StringExt.IsNullOrWhiteSpace(newDeployKey.Title))
                 throw new ArgumentException("The new deploy key's title must not be null.");
 
-            if (string.IsNullOrWhiteSpace(newDeployKey.Key))
+            if (StringExt.IsNullOrWhiteSpace(newDeployKey.Key))
                 throw new ArgumentException("The new deploy key's key must not be null.");
 
             return ApiConnection.Post<DeployKey>(ApiUrls.RepositoryDeployKeys(owner, name), newDeployKey);
@@ -150,10 +155,10 @@ namespace Octokit
         {
             Ensure.ArgumentNotNull(newDeployKey, "newDeployKey");
 
-            if (string.IsNullOrWhiteSpace(newDeployKey.Title))
+            if (StringExt.IsNullOrWhiteSpace(newDeployKey.Title))
                 throw new ArgumentException("The new deploy key's title must not be null.");
 
-            if (string.IsNullOrWhiteSpace(newDeployKey.Key))
+            if (StringExt.IsNullOrWhiteSpace(newDeployKey.Key))
                 throw new ArgumentException("The new deploy key's key must not be null.");
 
             return ApiConnection.Post<DeployKey>(ApiUrls.RepositoryDeployKeys(repositoryId), newDeployKey);

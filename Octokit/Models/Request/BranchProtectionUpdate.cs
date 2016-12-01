@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using Octokit.Internal;
+using System.Linq;
 
 namespace Octokit
 {
@@ -99,7 +99,7 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "IncludeAdmins: {0} Strict: {1} Contexts: {2}", IncludeAdmins, Strict, Contexts == null ? "" : String.Join(",", Contexts));
+                return string.Format(CultureInfo.InvariantCulture, "IncludeAdmins: {0} Strict: {1} Contexts: {2}", IncludeAdmins, Strict, Contexts == null ? "" : Contexts.Join(","));
             }
         }
     }
@@ -180,7 +180,7 @@ namespace Octokit
     }
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class BranchProtectionTeamCollection : Collection<string>
+    public class BranchProtectionTeamCollection : System.Collections.ObjectModel.Collection<string>
     {
         public BranchProtectionTeamCollection()
         { }
@@ -192,13 +192,13 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, String.Join(", ", this));
+                return string.Format(CultureInfo.InvariantCulture, this.Join(", "));
             }
         }
     }
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class BranchProtectionUserCollection : Collection<string>
+    public class BranchProtectionUserCollection : System.Collections.ObjectModel.Collection<string>
     {
         public BranchProtectionUserCollection()
         { }
@@ -210,7 +210,7 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, String.Join(", ", this));
+                return string.Format(CultureInfo.InvariantCulture, this.Join(", "));
             }
         }
     }

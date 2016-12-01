@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +9,8 @@ namespace Octokit
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class PunchCard
     {
+        private IReadOnlyList<int[]> punchCardData;
+
         public PunchCard() { }
 
         public PunchCard(IEnumerable<IList<int>> punchCardData)
@@ -18,6 +19,13 @@ namespace Octokit
             PunchPoints = new ReadOnlyCollection<PunchCardPoint>(
                 punchCardData.Select(point => new PunchCardPoint(point)).ToList());
         }
+
+#if NET_35
+        public PunchCard(IReadOnlyList<int[]> punchCardData)
+        {
+            this.punchCardData = punchCardData;
+        }
+#endif
 
         /// <summary>
         /// The raw punch card points

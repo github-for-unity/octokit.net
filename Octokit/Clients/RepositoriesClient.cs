@@ -1,10 +1,14 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 #if NET_45
 using System.Collections.Generic;
+using System.Threading.Tasks;
+#endif
+
+#if NET_35
+using System.Collections.Generic;
+using System.Threading.Tasks;
 #endif
 
 namespace Octokit
@@ -772,6 +776,7 @@ namespace Octokit
             Ensure.ArgumentNotNullOrEmptyString(name, "name");
 
             var endpoint = ApiUrls.RepositoryLanguages(owner, name);
+
             var data = await ApiConnection.Get<Dictionary<string, long>>(endpoint).ConfigureAwait(false);
 
             return new ReadOnlyCollection<RepositoryLanguage>(

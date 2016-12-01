@@ -18,7 +18,7 @@ namespace Octokit
 
         public RepositoryWebHookConfigException(IEnumerable<string> invalidConfig)
         {
-            var parameterList = string.Join(", ", invalidConfig.Select(ic => ic.FromRubyCase()));
+            var parameterList = invalidConfig.Select(ic => ic.FromRubyCase()).Join(", ");
             message = string.Format(CultureInfo.InvariantCulture,
                 "Duplicate webhook config values found - these values: {0} should not be passed in as part of the config values. Use the properties on the NewRepositoryWebHook class instead.",
                 parameterList);

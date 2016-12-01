@@ -25,7 +25,7 @@ namespace Octokit
         {
             get
             {
-                return String.Format(CultureInfo.InvariantCulture, "Message: {0}", string.Join("\r\n", Message));
+                return String.Format(CultureInfo.InvariantCulture, "Message: {0}", Message.Join("\r\n"));
             }
         }
     }

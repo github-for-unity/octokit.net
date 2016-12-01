@@ -20,8 +20,8 @@ namespace Octokit
         static readonly ConcurrentCache<Type, List<PropertyParameter>> _propertiesMap =
             new ConcurrentCache<Type, List<PropertyParameter>>();
 #else
-        static readonly ConcurrentDictionary<Type, List<PropertyParameter>> _propertiesMap =
-            new ConcurrentDictionary<Type, List<PropertyParameter>>();
+        static readonly ConcurrentDictionary<Type, IList<PropertyParameter>> _propertiesMap =
+            new ConcurrentDictionary<Type, IList<PropertyParameter>>();
 #endif
         /// <summary>
         /// Converts the derived object into a dictionary that can be used to supply query string parameters.
@@ -37,7 +37,7 @@ namespace Octokit
                     select new { key, value }).ToDictionary(kvp => kvp.key, kvp => kvp.value);
         }
 
-        static List<PropertyParameter> GetPropertyParametersForType(Type type)
+        static IList<PropertyParameter> GetPropertyParametersForType(Type type)
         {
             return type.GetAllProperties()
                 .Where(p => p.Name != "DebuggerDisplay")

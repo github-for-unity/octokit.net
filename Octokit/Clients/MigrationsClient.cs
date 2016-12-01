@@ -47,13 +47,13 @@ namespace Octokit
         /// </remarks>
         /// <param name="org">The organization of which to list migrations.</param>
         /// <returns>List of most recent <see cref="Migration"/>s.</returns>
-        public async Task<List<Migration>> GetAll(string org)
+        public async Task<Net40List<Migration>> GetAll(string org)
         {
             Ensure.ArgumentNotNullOrEmptyString(org, "org");
 
             var endpoint = ApiUrls.EnterpriseMigrations(org);
 
-            return await ApiConnection.Get<List<Migration>>(endpoint, null, AcceptHeaders.MigrationsApiPreview).ConfigureAwait(false);
+            return await ApiConnection.Get<Net40List<Migration>>(endpoint, null, AcceptHeaders.MigrationsApiPreview).ConfigureAwait(false);
         }
 
         /// <summary>

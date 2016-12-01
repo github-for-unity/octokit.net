@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+#if NET_45
+using StringExt = System.String;
+#endif
+#if NET_35
+using StringExt = GitHub.Extensions.StringExtensions;
+#endif
 
 namespace Octokit
 {
@@ -102,7 +108,7 @@ namespace Octokit
             Ensure.ArgumentNotNullOrEmptyString(name, "name");
             Ensure.ArgumentNotNull(newTree, "newTree");
 
-            if (newTree.Tree.Any(t => string.IsNullOrWhiteSpace(t.Mode)))
+            if (newTree.Tree.Any(t => StringExt.IsNullOrWhiteSpace(t.Mode)))
             {
                 throw new ArgumentException("You have specified items in the tree which do not have a Mode value set.");
             }
@@ -122,7 +128,7 @@ namespace Octokit
         {
             Ensure.ArgumentNotNull(newTree, "newTree");
 
-            if (newTree.Tree.Any(t => string.IsNullOrWhiteSpace(t.Mode)))
+            if (newTree.Tree.Any(t => StringExt.IsNullOrWhiteSpace(t.Mode)))
             {
                 throw new ArgumentException("You have specified items in the tree which do not have a Mode value set.");
             }

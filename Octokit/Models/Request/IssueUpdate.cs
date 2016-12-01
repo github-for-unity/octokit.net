@@ -70,7 +70,7 @@ namespace Octokit
             // lazily create the label array
             if (Labels == null)
             {
-                Labels = new List<string>();
+                Labels = new Net40List<string>();
             }
 
             Labels.Add(name);
@@ -84,7 +84,7 @@ namespace Octokit
             // lazily create the label array
             if (Labels == null)
             {
-                Labels = new List<string>();
+                Labels = new Net40List<string>();
             }
             else
             {

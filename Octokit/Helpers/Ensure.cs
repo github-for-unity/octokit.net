@@ -1,5 +1,11 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+#if NET_45
+using StringExt = System.String;
+#endif
+#if NET_35
+using StringExt = GitHub.Extensions.StringExtensions;
+#endif
 
 namespace Octokit
 {
@@ -28,7 +34,7 @@ namespace Octokit
         public static void ArgumentNotNullOrEmptyString([ValidatedNotNull]string value, string name)
         {
             ArgumentNotNull(value, name);
-            if (!string.IsNullOrWhiteSpace(value)) return;
+            if (!StringExt.IsNullOrWhiteSpace(value)) return;
 
             throw new ArgumentException("String cannot be empty", name);
         }
