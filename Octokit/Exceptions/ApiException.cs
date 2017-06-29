@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
+#if !NO_SERIALIZABLE
 using System.Runtime.Serialization;
+#endif
+using System.Security;
 using Octokit.Internal;
 
 namespace Octokit
@@ -9,7 +12,7 @@ namespace Octokit
     /// <summary>
     /// Represents errors that occur from the GitHub API.
     /// </summary>
-#if !NETFX_CORE
+#if !NO_SERIALIZABLE
     [Serializable]
 #endif
     [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
@@ -138,7 +141,7 @@ namespace Octokit
             return new ApiError(responseContent);
         }
 
-#if !NETFX_CORE
+#if !NO_SERIALIZABLE
         /// <summary>
         /// Constructs an instance of ApiException.
         /// </summary>
@@ -154,10 +157,11 @@ namespace Octokit
             : base(info, context)
         {
             if (info == null) return;
-            StatusCode = (HttpStatusCode) info.GetInt32("HttpStatusCode");
-            ApiError = (ApiError) info.GetValue("ApiError", typeof(ApiError));
+            StatusCode = (HttpStatusCode)info.GetInt32("HttpStatusCode");
+            ApiError = (ApiError)info.GetValue("ApiError", typeof(ApiError));
         }
 
+        [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -176,7 +180,12 @@ namespace Octokit
         {
             get
             {
-                return ApiError != null ? ApiError.Message : null;
+                if (ApiError != null && !string.IsNullOrWhiteSpace(ApiError.Message))
+                {
+                    return ApiError.Message;
+                }
+
+                return null;
             }
         }
 

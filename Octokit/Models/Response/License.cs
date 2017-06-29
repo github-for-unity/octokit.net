@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -12,8 +11,8 @@ namespace Octokit
         public License(
             string key,
             string name,
-            Uri url,
-            Uri htmlUrl,
+            string url,
+            string htmlUrl,
             bool featured,
             string description,
             string category,
@@ -50,7 +49,7 @@ namespace Octokit
         /// <summary>
         /// Url to the license on https://choosealicense.com
         /// </summary>
-        public Uri HtmlUrl { get; protected set; }
+        public string HtmlUrl { get; protected set; }
 
         /// <summary>
         /// Whether the license is one of the licenses featured on https://choosealicense.com

@@ -73,7 +73,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(1, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -88,7 +88,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(1, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -131,7 +131,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(3, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octocat/Spoon-Knife/blob/master/README.md"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octocat/Spoon-Knife/blob/master/README.md", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -146,7 +146,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(3, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octocat/Spoon-Knife/blob/master/README.md"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octocat/Spoon-Knife/blob/master/README.md", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -190,7 +190,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(1, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -205,7 +205,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(1, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octokit/octokit.net/blob/master/Octokit.Reactive/ObservableGitHubClient.cs", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -248,7 +248,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(3, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octocat/Spoon-Knife/blob/master/README.md"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octocat/Spoon-Knife/blob/master/README.md", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -263,7 +263,7 @@ namespace Octokit.Tests.Integration.Clients
 
                 Assert.Equal(3, contents.Count);
                 Assert.Equal(ContentType.File, contents.First().Type);
-                Assert.Equal(new Uri("https://github.com/octocat/Spoon-Knife/blob/master/README.md"), contents.First().HtmlUrl);
+                Assert.Equal("https://github.com/octocat/Spoon-Knife/blob/master/README.md", contents.First().HtmlUrl);
             }
 
             [IntegrationTest]
@@ -453,6 +453,182 @@ namespace Octokit.Tests.Integration.Clients
                     repository.Id,
                     "somefile.txt",
                     new UpdateFileRequest("Updating file", "New Content", fileSha, branchName));
+                Assert.Equal("somefile.txt", update.Content.Name);
+
+                contents = await fixture.GetAllContentsByRef(repository.Owner.Login, repository.Name, "somefile.txt", branchName);
+                Assert.Equal("New Content", contents.First().Content);
+                fileSha = contents.First().Sha;
+
+                await fixture.DeleteFile(
+                    repository.Id,
+                    "somefile.txt",
+                    new DeleteFileRequest("Deleted file", fileSha, branchName));
+
+                await Assert.ThrowsAsync<NotFoundException>(
+                    () => fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt"));
+            }
+        }
+
+        [IntegrationTest]
+        public async Task CrudTestWithExplicitBase64()
+        {
+            var client = Helper.GetAuthenticatedClient();
+            var fixture = client.Repository.Content;
+            var repoName = Helper.MakeNameWithTimestamp("source-repo");
+
+            using (var context = await client.CreateRepositoryContext(new NewRepository(repoName) { AutoInit = true }))
+            {
+                var repository = context.Repository;
+
+                var file = await fixture.CreateFile(
+                    repository.Owner.Login,
+                    repository.Name,
+                    "somefile.txt",
+                    new CreateFileRequest("Test commit", "U29tZSBDb250ZW50", false));
+                Assert.Equal("somefile.txt", file.Content.Name);
+
+                var contents = await fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt");
+                string fileSha = contents.First().Sha;
+                Assert.Equal("Some Content", contents.First().Content);
+
+                var update = await fixture.UpdateFile(
+                    repository.Owner.Login,
+                    repository.Name,
+                    "somefile.txt",
+                    new UpdateFileRequest("Updating file", "TmV3IENvbnRlbnQ=", fileSha, false));
+                Assert.Equal("somefile.txt", update.Content.Name);
+
+                contents = await fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt");
+                Assert.Equal("New Content", contents.First().Content);
+                fileSha = contents.First().Sha;
+
+                await fixture.DeleteFile(
+                    repository.Owner.Login,
+                    repository.Name,
+                    "somefile.txt",
+                    new DeleteFileRequest("Deleted file", fileSha));
+
+                await Assert.ThrowsAsync<NotFoundException>(
+                     () => fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt"));
+            }
+        }
+
+        [IntegrationTest]
+        public async Task CrudTestWithRepositoryIdWithExplicitBase64()
+        {
+            var client = Helper.GetAuthenticatedClient();
+            var fixture = client.Repository.Content;
+            var repoName = Helper.MakeNameWithTimestamp("source-repo");
+
+            using (var context = await client.CreateRepositoryContext(new NewRepository(repoName) { AutoInit = true }))
+            {
+                var repository = context.Repository;
+
+                var file = await fixture.CreateFile(
+                    repository.Id,
+                    "somefile.txt",
+                    new CreateFileRequest("Test commit", "U29tZSBDb250ZW50", false));
+                Assert.Equal("somefile.txt", file.Content.Name);
+
+                var contents = await fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt");
+                string fileSha = contents.First().Sha;
+                Assert.Equal("Some Content", contents.First().Content);
+
+                var update = await fixture.UpdateFile(
+                    repository.Id,
+                    "somefile.txt",
+                    new UpdateFileRequest("Updating file", "TmV3IENvbnRlbnQ=", fileSha, false));
+                Assert.Equal("somefile.txt", update.Content.Name);
+
+                contents = await fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt");
+                Assert.Equal("New Content", contents.First().Content);
+                fileSha = contents.First().Sha;
+
+                await fixture.DeleteFile(
+                    repository.Id,
+                    "somefile.txt",
+                    new DeleteFileRequest("Deleted file", fileSha));
+
+                await Assert.ThrowsAsync<NotFoundException>(
+                     () => fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt"));
+            }
+        }
+
+        [IntegrationTest]
+        public async Task CrudTestWithNamedBranchWithExplicitBase64()
+        {
+            var client = Helper.GetAuthenticatedClient();
+            var fixture = client.Repository.Content;
+            var repoName = Helper.MakeNameWithTimestamp("source-repo");
+            var branchName = "other-branch";
+
+            using (var context = await client.CreateRepositoryContext(new NewRepository(repoName) { AutoInit = true }))
+            {
+                var repository = context.Repository;
+
+                var master = await client.Git.Reference.Get(Helper.UserName, repository.Name, "heads/master");
+                await client.Git.Reference.Create(Helper.UserName, repository.Name, new NewReference("refs/heads/" + branchName, master.Object.Sha));
+                var file = await fixture.CreateFile(
+                    repository.Owner.Login,
+                    repository.Name,
+                    "somefile.txt",
+                    new CreateFileRequest("Test commit", "U29tZSBDb250ZW50", branchName, false));
+                Assert.Equal("somefile.txt", file.Content.Name);
+
+                var contents = await fixture.GetAllContentsByRef(repository.Owner.Login, repository.Name, "somefile.txt", branchName);
+                string fileSha = contents.First().Sha;
+                Assert.Equal("Some Content", contents.First().Content);
+
+                var update = await fixture.UpdateFile(
+                    repository.Owner.Login,
+                    repository.Name,
+                    "somefile.txt",
+                    new UpdateFileRequest("Updating file", "TmV3IENvbnRlbnQ=", fileSha, branchName, false));
+                Assert.Equal("somefile.txt", update.Content.Name);
+
+                contents = await fixture.GetAllContentsByRef(repository.Owner.Login, repository.Name, "somefile.txt", branchName);
+                Assert.Equal("New Content", contents.First().Content);
+                fileSha = contents.First().Sha;
+
+                await fixture.DeleteFile(
+                    repository.Owner.Login,
+                    repository.Name,
+                    "somefile.txt",
+                    new DeleteFileRequest("Deleted file", fileSha, branchName));
+
+                await Assert.ThrowsAsync<NotFoundException>(
+                    () => fixture.GetAllContents(repository.Owner.Login, repository.Name, "somefile.txt"));
+            }
+        }
+
+        [IntegrationTest]
+        public async Task CrudTestWithNamedBranchWithRepositoryIdWithExplicitBase64()
+        {
+            var client = Helper.GetAuthenticatedClient();
+            var fixture = client.Repository.Content;
+            var repoName = Helper.MakeNameWithTimestamp("source-repo");
+            var branchName = "other-branch";
+
+            using (var context = await client.CreateRepositoryContext(new NewRepository(repoName) { AutoInit = true }))
+            {
+                var repository = context.Repository;
+
+                var master = await client.Git.Reference.Get(Helper.UserName, repository.Name, "heads/master");
+                await client.Git.Reference.Create(Helper.UserName, repository.Name, new NewReference("refs/heads/" + branchName, master.Object.Sha));
+                var file = await fixture.CreateFile(
+                    repository.Id,
+                    "somefile.txt",
+                    new CreateFileRequest("Test commit", "U29tZSBDb250ZW50", branchName, false));
+                Assert.Equal("somefile.txt", file.Content.Name);
+
+                var contents = await fixture.GetAllContentsByRef(repository.Owner.Login, repository.Name, "somefile.txt", branchName);
+                string fileSha = contents.First().Sha;
+                Assert.Equal("Some Content", contents.First().Content);
+
+                var update = await fixture.UpdateFile(
+                    repository.Id,
+                    "somefile.txt",
+                    new UpdateFileRequest("Updating file", "TmV3IENvbnRlbnQ=", fileSha, branchName, false));
                 Assert.Equal("somefile.txt", update.Content.Name);
 
                 contents = await fixture.GetAllContentsByRef(repository.Owner.Login, repository.Name, "somefile.txt", branchName);

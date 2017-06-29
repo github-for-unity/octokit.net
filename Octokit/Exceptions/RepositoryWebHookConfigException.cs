@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+#if !NO_SERIALIZABLE
 using System.Runtime.Serialization;
+#endif
+using System.Security;
 
 namespace Octokit
 {
-#if !NETFX_CORE
+#if !NO_SERIALIZABLE
     [Serializable]
 #endif
     [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
@@ -29,7 +32,7 @@ namespace Octokit
             get { return message; }
         }
 
-#if !NETFX_CORE
+#if !NO_SERIALIZABLE
         /// <summary>
         /// Constructs an instance of RepositoryWebHookConfigException
         /// </summary>
@@ -48,6 +51,7 @@ namespace Octokit
             message = info.GetString("Message");
         }
 
+        [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
