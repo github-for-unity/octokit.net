@@ -265,9 +265,9 @@ namespace System.Collections.Generic
             InsertRange(_size, collection);
         }
 
-        public ReadOnlyCollection<T> AsReadOnly()
+        public Octokit.ReadOnlyCollection<T> AsReadOnly()
         {
-            return new ReadOnlyCollection<T>(this);
+            return new Octokit.ReadOnlyCollection<T>(this);
         }
 
         // Searches a section of the list for a given element using a binary search

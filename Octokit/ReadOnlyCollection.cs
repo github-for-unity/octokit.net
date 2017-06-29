@@ -1,4 +1,4 @@
-﻿namespace System.Collections.Generic
+﻿namespace Octokit
 {
     using System;
     using System.Collections;
