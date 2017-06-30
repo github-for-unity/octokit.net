@@ -1,9 +1,13 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Octokit.Internal;
+
+#if NET_45
+using System.Net.Http;
+#endif
+#if NET_35
+#endif
 
 namespace Octokit
 {

@@ -23,7 +23,7 @@ namespace Octokit
 
         internal string DebuggerDisplay
         {
-            get { return string.Format(CultureInfo.InvariantCulture, "Reviewers: {0}", string.Join(", ", Reviewers)); }
+            get { return string.Format(CultureInfo.InvariantCulture, "Reviewers: {0}", Reviewers.Join(", ")); }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.Serialization;
 #endif
 using System.Security;
+using GitHub.Extensions;
 using Octokit.Internal;
 
 namespace Octokit
@@ -180,7 +181,7 @@ namespace Octokit
         {
             get
             {
-                if (ApiError != null && !string.IsNullOrWhiteSpace(ApiError.Message))
+                if (ApiError != null && !ApiError.Message.IsNullOrWhiteSpace())
                 {
                     return ApiError.Message;
                 }

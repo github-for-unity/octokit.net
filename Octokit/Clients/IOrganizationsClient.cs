@@ -2,10 +2,13 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 #endif
+
+using System;
 #if NET_35
 using System.Collections.Generic;
 using System.Threading.Tasks;
 #endif
+
 using System.Diagnostics.CodeAnalysis;
 
 namespace Octokit
