@@ -82,6 +82,7 @@
     <Compile Include="Clients\IIssuesLabelsClient.cs" />
     <Compile Include="Clients\IMergingClient.cs" />
     <Compile Include="Clients\IOrganizationMembersClient.cs" />
+    <Compile Include="Clients\IPullRequestReviewRequestsClient.cs" />
     <Compile Include="Clients\IReferencesClient.cs" />
     <Compile Include="Clients\IPullRequestsClient.cs" />
     <Compile Include="Clients\IRepositoryForksClient.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Clients\IWatchedClient.cs" />
     <Compile Include="Clients\MilestonesClient.cs" />
     <Compile Include="Clients\OrganizationMembersClient.cs" />
+    <Compile Include="Clients\PullRequestReviewRequestsClient.cs" />
     <Compile Include="Clients\ReferencesClient.cs" />
     <Compile Include="Clients\RepositoryForksClient.cs" />
     <Compile Include="Clients\RepositoryHooksClient.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Clients\TeamsClient.cs" />
     <Compile Include="Clients\UserAdministrationClient.cs" />
     <Compile Include="Clients\WatchedClient.cs" />
+    <Compile Include="Exceptions\AbuseException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Clients\IAssigneesClient.cs" />
     <Compile Include="Clients\IIssuesClient.cs" />
@@ -121,8 +124,12 @@
     <Compile Include="Helpers\ParameterAttribute.cs" />
     <Compile Include="Helpers\ReflectionExtensions.cs" />
     <Compile Include="IAwaitable.cs" />
+    <Compile Include="Models\Request\AssigneesUpdate.cs" />
+    <Compile Include="Models\Request\IssueCommentRequest.cs" />
+    <Compile Include="Models\Request\OrganizationRequest.cs" />
+    <Compile Include="Models\Request\PullRequestReviewRequest.cs" />
+    <Compile Include="Models\Response\StringEnum.cs" />
     <Compile Include="Net40List.cs" />
-    <Compile Include="Models\Request\BranchUpdate.cs" />
     <Compile Include="Models\Request\GistFileUpdate.cs" />
     <Compile Include="Models\Request\GistRequest.cs" />
     <Compile Include="Models\Request\GistUpdate.cs" />
@@ -530,7 +537,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\dotnet-httpclient35\System.Net.Http\System.Net.Http-net_3_5.csproj">
+    <ProjectReference Include="..\submodules\dotnet-httpclient35\System.Net.Http\System.Net.Http-net_3_5.csproj">
       <Project>{9862694d-e4fa-418b-8692-a0280feddf36}</Project>
       <Name>System.Net.Http-net_3_5</Name>
     </ProjectReference>

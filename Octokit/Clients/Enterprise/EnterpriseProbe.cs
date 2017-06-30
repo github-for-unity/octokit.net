@@ -1,9 +1,13 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Octokit.Internal;
+
+#if NET_45
+using System.Net.Http;
+#endif
+#if NET_35
+#endif
 
 namespace Octokit
 {
@@ -44,7 +48,7 @@ namespace Octokit
             Ensure.ArgumentNotNull(productInformation, "productHeader");
             Ensure.ArgumentNotNull(httpClient, "httpClient");
 
-            this.productHeader = productInformation;
+            productHeader = productInformation;
             this.httpClient = httpClient;
         }
 
@@ -93,7 +97,6 @@ namespace Octokit
                 : (IsEnterpriseResponse(response)
                     ? EnterpriseProbeResult.Ok
                     : EnterpriseProbeResult.NotFound);
-
         }
 
         static bool IsEnterpriseResponse(IResponse response)

@@ -20,7 +20,7 @@ public class PullRequestReviewCommentsClientTests : IDisposable
     {
         _github = Helper.GetAuthenticatedClient();
 
-        _client = _github.PullRequest.Comment;
+        _client = _github.PullRequest.ReviewComment;
 
         // We'll create a pull request that can be used by most tests
         _context = _github.CreateRepositoryContext("test-repo").Result;
@@ -406,7 +406,6 @@ public class PullRequestReviewCommentsClientTests : IDisposable
         var pullRequestComments = await _client.GetAllForRepository(_context.Repository.Id);
 
         AssertComments(pullRequestComments, commentsToCreate, position);
-
     }
 
     [IntegrationTest]
@@ -855,7 +854,7 @@ public class PullRequestReviewCommentsClientTests : IDisposable
 
 
         var repoName = context.RepositoryName;
-        
+
         // Creating a commit in master
 
         var createdCommitInMaster = await CreateCommit(repoName, "Hello World!", "README.md", "heads/master", "A master commit message");

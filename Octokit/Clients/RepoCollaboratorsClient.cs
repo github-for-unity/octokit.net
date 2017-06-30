@@ -179,11 +179,11 @@ namespace Octokit
             Ensure.ArgumentNotNullOrEmptyString(user, "user");
 
             try
-            {
+            { 
                 var response = await Connection.Put<object>(ApiUrls.RepoCollaborator(owner, name, user), permission).ConfigureAwait(false);
                 return response.HttpResponse.IsTrue();
             }
-            catch
+            catch (NotFoundException)
             {
                 return false;
             }
@@ -224,7 +224,7 @@ namespace Octokit
                 var response = await Connection.Put<object>(ApiUrls.RepoCollaborator(repositoryId, user), permission).ConfigureAwait(false);
                 return response.HttpResponse.IsTrue();
             }
-            catch
+            catch (NotFoundException)
             {
                 return false;
             }

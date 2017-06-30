@@ -63,7 +63,7 @@ namespace Octokit.Tests.Clients
                 var cancellationToken = new CancellationToken(true);
 
                 var connection = Substitute.For<IApiConnection>();
-                
+
                 connection.GetQueuedOperation<Contributor>(expectedEndPoint, cancellationToken)
                     .Returns(Task.FromResult(contributors));
 
@@ -82,7 +82,7 @@ namespace Octokit.Tests.Clients
                 var cancellationToken = new CancellationToken(true);
 
                 var connection = Substitute.For<IApiConnection>();
-                
+
                 connection.GetQueuedOperation<Contributor>(expectedEndPoint, cancellationToken)
                     .Returns(Task.FromResult(contributors));
 
@@ -163,7 +163,7 @@ namespace Octokit.Tests.Clients
                     .Returns(Task.FromResult(response));
 
                 var client = new StatisticsClient(connection);
-                
+
                 var result = await client.GetCommitActivity("owner", "name", cancellationToken);
 
                 Assert.Equal(2, result.Activity[0].Days.Count);
@@ -186,7 +186,7 @@ namespace Octokit.Tests.Clients
                     .Returns(Task.FromResult(response));
 
                 var client = new StatisticsClient(connection);
-                
+
                 var result = await client.GetCommitActivity(1, cancellationToken);
 
                 Assert.Equal(2, result.Activity[0].Days.Count);
@@ -378,7 +378,7 @@ namespace Octokit.Tests.Clients
                 var statisticsClient = new StatisticsClient(client);
 
                 statisticsClient.GetParticipation("owner", "name", cancellationToken);
-                
+
                 client.Received().GetQueuedOperation<Participation>(expectedEndPoint, cancellationToken);
             }
 
@@ -392,7 +392,7 @@ namespace Octokit.Tests.Clients
                 var statisticsClient = new StatisticsClient(client);
 
                 statisticsClient.GetParticipation(1, cancellationToken);
-                
+
                 client.Received().GetQueuedOperation<Participation>(expectedEndPoint, cancellationToken);
             }
 

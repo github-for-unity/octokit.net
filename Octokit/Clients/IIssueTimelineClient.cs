@@ -1,7 +1,5 @@
-﻿#if NET_45
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-#endif
 
 #if NET_35
 using System.Collections.Generic;
