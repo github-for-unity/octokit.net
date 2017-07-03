@@ -215,6 +215,7 @@
     <Compile Include="Models\Request\NewTreeItem.cs" />
     <Compile Include="Models\Request\NewTeam.cs" />
     <Compile Include="Models\Request\NewMerge.cs" />
+    <Compile Include="Models\Request\OrganizationRequest.cs" />
     <Compile Include="Models\Request\OrganizationUpdate.cs" />
     <Compile Include="Models\Request\Permission.cs" />
     <Compile Include="Models\Request\ReferenceUpdate.cs" />
@@ -465,6 +466,7 @@
     <Compile Include="Clients\MigrationsClient.cs" />
     <Compile Include="Models\Request\StartMigrationRequest.cs" />
     <Compile Include="Models\Response\Migration.cs" />
+    <Compile Include="Models\Request\AssigneesUpdate.cs" />
     <Compile Include="Models\Request\NewReaction.cs" />
     <Compile Include="Clients\ReactionsClient.cs" />
     <Compile Include="Clients\IReactionsClient.cs" />
@@ -506,6 +508,8 @@
     <Compile Include="Models\Request\RepositoryTrafficRequest.cs" />
     <Compile Include="Clients\RepositoryTrafficClient.cs" />
     <Compile Include="Helpers\ExcludeFromPaginationConventionTest.cs" />
+    <Compile Include="Models\Request\IssueCommentRequest.cs" />
+    <Compile Include="Exceptions\AbuseException.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

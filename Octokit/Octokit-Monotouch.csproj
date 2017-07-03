@@ -93,6 +93,7 @@
     <Compile Include="Models\Request\NewTag.cs" />
     <Compile Include="Models\Request\NewTree.cs" />
     <Compile Include="Models\Request\NewTreeItem.cs" />
+    <Compile Include="Models\Request\OrganizationRequest.cs" />
     <Compile Include="Models\Response\Feed.cs" />
     <Compile Include="Models\Response\FeedLink.cs" />
     <Compile Include="Models\Request\PullRequestRequest.cs" />
@@ -467,6 +468,7 @@
     <Compile Include="Models\Response\Enterprise\Migration.cs" />
     <Compile Include="Models\Request\StartMigrationRequest.cs" />
     <Compile Include="Models\Response\Migration.cs" />
+    <Compile Include="Models\Request\AssigneesUpdate.cs" />
     <Compile Include="Models\Request\NewReaction.cs" />
     <Compile Include="Models\Response\Reaction.cs" />
     <Compile Include="Clients\ReactionsClient.cs" />
@@ -509,6 +511,8 @@
     <Compile Include="Models\Request\RepositoryTrafficRequest.cs" />
     <Compile Include="Clients\RepositoryTrafficClient.cs" />
     <Compile Include="Helpers\ExcludeFromPaginationConventionTest.cs" />
+    <Compile Include="Models\Request\IssueCommentRequest.cs" />
+    <Compile Include="Exceptions\AbuseException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

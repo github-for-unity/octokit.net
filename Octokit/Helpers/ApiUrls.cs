@@ -75,6 +75,7 @@ namespace Octokit
         /// Returns the <see cref="Uri"/> that returns all of the organizations for the currently logged in user.
         /// </summary>
         /// <returns></returns>
+        [Obsolete("Please use ApiUrls.UserOrganizations() instead. This method will be removed in a future version")]
         public static Uri Organizations()
         {
             return _currentUserOrganizationsUrl;
@@ -85,9 +86,48 @@ namespace Octokit
         /// </summary>
         /// <param name="login">The login for the user</param>
         /// <returns></returns>
+        [Obsolete("Please use ApiUrls.UserOrganizations() instead. This method will be removed in a future version")]
         public static Uri Organizations(string login)
         {
             return "users/{0}/orgs".FormatUri(login);
+        }
+
+        /// <summary>
+        /// Returns the <see cref="Uri"/> that returns all of the organizations for the currently logged in user.
+        /// </summary>
+        /// <returns></returns>
+        public static Uri UserOrganizations()
+        {
+            return "user/orgs".FormatUri();
+        }
+
+        /// <summary>
+        /// Returns the <see cref="Uri"/> that returns all of the organizations for the specified login.
+        /// </summary>
+        /// <param name="login">The login for the user</param>
+        /// <returns></returns>
+        public static Uri UserOrganizations(string login)
+        {
+            return "users/{0}/orgs".FormatUri(login);
+        }
+
+        /// <summary>
+        /// Returns the <see cref="Uri"/> that returns all of the organizations.
+        /// </summary>
+        /// <returns></returns>
+        public static Uri AllOrganizations()
+        {
+            return "organizations".FormatUri();
+        }
+
+        /// <summary>
+        /// Returns the <see cref="Uri"/> that returns all of the organizations.
+        /// </summary>
+        /// /// <param name="since">The integer Id of the last Organization that you’ve seen.</param>
+        /// <returns></returns>
+        public static Uri AllOrganizations(long since)
+        {
+            return "organizations?since={0}".FormatUri(since);
         }
 
         /// <summary>
@@ -502,6 +542,18 @@ namespace Octokit
         public static Uri CheckAssignee(string owner, string name, string login)
         {
             return "repos/{0}/{1}/assignees/{2}".FormatUri(owner, name, login);
+        }
+
+        /// <summary>
+        /// Returns the <see cref="Uri"/> to add and remove assignees for an issue.        
+        /// </summary>
+        /// <param name="owner">The owner of the repository</param>
+        /// <param name="name">The name of the repository</param>
+        /// <param name="number">The issue number</param>
+        /// <returns></returns>
+        public static Uri IssueAssignees(string owner, string name, int number)
+        {
+            return "repos/{0}/{1}/issues/{2}/assignees".FormatUri(owner, name, number);
         }
 
         /// <summary>
@@ -2792,8 +2844,6 @@ namespace Octokit
         /// <returns>The <see cref="Uri"/> for comparing two commits.</returns>
         public static Uri RepoCompare(long repositoryId, string @base, string head)
         {
-
-
             Ensure.ArgumentNotNullOrEmptyString(@base, "base");
             Ensure.ArgumentNotNullOrEmptyString(head, "head");
             var encodedBase = @base.UriEncode();
