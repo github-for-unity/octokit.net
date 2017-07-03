@@ -9,9 +9,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Octokit</RootNamespace>
     <AssemblyName>Octokit</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <LangVersion>5</LangVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,7 +18,7 @@
     <Optimize>false</Optimize>
     <IntermediateOutputPath>obj\Debug\Mono</IntermediateOutputPath>
     <OutputPath>bin\Debug\Mono</OutputPath>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;SIMPLE_JSON_OBJARRAYINTERNAL;SIMPLE_JSON_INTERNAL;NET_35;SIMPLE_JSON_READONLY_COLLECTIONS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;SIMPLE_JSON_OBJARRAYINTERNAL;SIMPLE_JSON_INTERNAL;NET_45;SIMPLE_JSON_READONLY_COLLECTIONS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -37,20 +36,8 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncBridge.Net35, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87, processorArchitecture=MSIL">
-      <HintPath>..\..\..\src\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ReadOnlyCollectionsInterfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\src\packages\ReadOnlyCollectionInterfaces.1.0.0\lib\NET20\ReadOnlyCollectionsInterfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\src\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SolutionInfo.cs">
@@ -116,8 +103,6 @@
     <Compile Include="Helpers\AcceptHeaders.cs" />
     <Compile Include="Helpers\ParameterAttribute.cs" />
     <Compile Include="Helpers\ReflectionExtensions.cs" />
-    <Compile Include="IAwaitable.cs" />
-    <Compile Include="List.cs" />
     <Compile Include="Models\Request\BranchUpdate.cs" />
     <Compile Include="Models\Request\GistFileUpdate.cs" />
     <Compile Include="Models\Request\GistRequest.cs" />
@@ -142,6 +127,7 @@
     <Compile Include="Models\Request\NewTree.cs" />
     <Compile Include="Models\Request\NewTreeItem.cs" />
     <Compile Include="Models\Request\NewTeam.cs" />
+    <Compile Include="Models\Request\OrganizationRequest.cs" />
     <Compile Include="Models\Request\OrganizationUpdate.cs" />
     <Compile Include="Models\Request\Permission.cs" />
     <Compile Include="Models\Request\ReferenceUpdate.cs" />
@@ -209,7 +195,6 @@
     <Compile Include="Models\Response\WeeklyCommitActivity.cs" />
     <Compile Include="Models\Response\WeeklyHash.cs" />
     <Compile Include="Models\Response\PullRequestReviewComment.cs" />
-    <Compile Include="OctokitExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\TwoFactorChallengeFailedException.cs" />
     <Compile Include="Exceptions\TwoFactorRequiredException.cs" />
@@ -477,6 +462,7 @@
     <Compile Include="Clients\MigrationsClient.cs" />
     <Compile Include="Models\Request\StartMigrationRequest.cs" />
     <Compile Include="Models\Response\Migration.cs" />
+    <Compile Include="Models\Request\AssigneesUpdate.cs" />
     <Compile Include="Models\Request\NewReaction.cs" />
     <Compile Include="Models\Response\Reaction.cs" />
     <Compile Include="Clients\ReactionsClient.cs" />
@@ -518,21 +504,8 @@
     <Compile Include="Models\Request\RepositoryTrafficRequest.cs" />
     <Compile Include="Clients\RepositoryTrafficClient.cs" />
     <Compile Include="Helpers\ExcludeFromPaginationConventionTest.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="ThrowHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\VS\dotnet-httpclient35\System.Net.Http\System.Net.Http-net_3_5.csproj">
-      <Project>{9862694d-e4fa-418b-8692-a0280feddf36}</Project>
-      <Name>System.Net.Http-net_3_5</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\GitHub.Extensions35\GitHub.Extensions35.csproj">
-      <Project>{3be1a792-e5a3-4374-9479-32b808443c03}</Project>
-      <Name>GitHub.Extensions35</Name>
-    </ProjectReference>
+    <Compile Include="Models\Request\IssueCommentRequest.cs" />
+    <Compile Include="Exceptions\AbuseException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

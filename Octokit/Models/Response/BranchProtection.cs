@@ -127,7 +127,7 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, 
+                return string.Format(CultureInfo.InvariantCulture,
                     "StatusChecks: {0} Restrictions: {1}",
                     RequiredStatusChecks == null ? "disabled" : RequiredStatusChecks.DebuggerDisplay,
                     Restrictions == null ? "disabled" : Restrictions.DebuggerDisplay);
@@ -171,8 +171,8 @@ namespace Octokit
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "IncludeAdmins: {0} Strict: {1} Contexts: {2}",
-                    IncludeAdmins, 
-                    Strict, 
+                    IncludeAdmins,
+                    Strict,
                     Contexts == null ? "" : Contexts.Join(","));
             }
         }
@@ -206,7 +206,7 @@ namespace Octokit
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, 
+                return string.Format(CultureInfo.InvariantCulture,
                     "Teams: {0} Users: {1}",
                     Teams == null ? "" : Teams.Join(","),
                     Users == null ? "" : Users.Join(","));

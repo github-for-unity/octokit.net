@@ -21,7 +21,7 @@ namespace Octokit.Tests.Clients
                 await client.Get("fake", "repo", 42);
 
                 connection.Received().Get<IssueComment>(
-                    Arg.Is<Uri>(u => u.ToString() == "repos/fake/repo/issues/comments/42"), 
+                    Arg.Is<Uri>(u => u.ToString() == "repos/fake/repo/issues/comments/42"),
                     Arg.Any<Dictionary<string, string>>(),
                     "application/vnd.github.squirrel-girl-preview");
             }
@@ -136,9 +136,11 @@ namespace Octokit.Tests.Clients
                 await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository("owner", null));
                 await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository(null, "name", ApiOptions.None));
                 await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository("owner", null, ApiOptions.None));
-                await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository("owner", "name", null));
+                await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository("owner", "name", options: null));
+                await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository("owner", "name", null, ApiOptions.None));
 
-                await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository(1, null));
+                await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository(1, options: null));
+                await Assert.ThrowsAsync<ArgumentNullException>(() => client.GetAllForRepository(1, null, ApiOptions.None));
 
                 await Assert.ThrowsAsync<ArgumentException>(() => client.GetAllForRepository("", "name"));
                 await Assert.ThrowsAsync<ArgumentException>(() => client.GetAllForRepository("owner", ""));
@@ -194,7 +196,7 @@ namespace Octokit.Tests.Clients
                 await client.GetAllForIssue("fake", "repo", 3, options);
 
                 connection.Received().GetAll<IssueComment>(
-                    Arg.Is<Uri>(u => u.ToString() == "repos/fake/repo/issues/3/comments"), 
+                    Arg.Is<Uri>(u => u.ToString() == "repos/fake/repo/issues/3/comments"),
                     Arg.Any<Dictionary<string, string>>(),
                     "application/vnd.github.squirrel-girl-preview",
                     options);
