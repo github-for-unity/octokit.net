@@ -12,13 +12,13 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <LangVersion>5</LangVersion>
     <TargetFrameworkProfile />
+    <IntermediateOutputPath>obj\$(Configuration)\35</IntermediateOutputPath>
+    <OutputPath>bin\$(Configuration)\35</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <IntermediateOutputPath>obj\Debug\Mono</IntermediateOutputPath>
-    <OutputPath>bin\Debug\Mono</OutputPath>
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;SIMPLE_JSON_OBJARRAYINTERNAL;SIMPLE_JSON_INTERNAL;NET_35;SIMPLE_JSON_READONLY_COLLECTIONS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,13 +27,10 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <IntermediateOutputPath>obj\Release\Mono</IntermediateOutputPath>
     <DefineConstants>TRACE;CODE_ANALYSIS;SIMPLE_JSON_OBJARRAYINTERNAL;SIMPLE_JSON_INTERNAL;NET_35;SIMPLE_JSON_READONLY_COLLECTIONS</DefineConstants>
-    <OutputPath>bin\Release\Mono</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DocumentationFile>bin\Release\Mono\Octokit.XML</DocumentationFile>
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -536,4 +533,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="BeforeBuild">
+    <PropertyGroup>
+      <MissingHttpProject>To build the OctokitDebugging solution you need to have https://github.com/github-for-unity/dotnet-httpclient35 checked out in {0}</MissingHttpProject>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)..\dotnet-httpclient35\System.Net.Http\System.Net.Http-net_3_5.csproj')" Text="$([System.String]::Format('$(MissingOctokitProject)', '$(SolutionDir)..\dotnet-httpclient35'))" />
+  </Target>
 </Project>

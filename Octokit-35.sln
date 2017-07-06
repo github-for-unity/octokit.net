@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octokit-35", "Octokit\Octokit-35.csproj", "{49EF16A2-5ED1-480F-80A1-D1D05D6C1BE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49EF16A2-5ED1-480F-80A1-D1D05D6C1BE4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49EF16A2-5ED1-480F-80A1-D1D05D6C1BE4}.Debug|x86.Build.0 = Debug|Any CPU
+		{49EF16A2-5ED1-480F-80A1-D1D05D6C1BE4}.Release|x86.ActiveCfg = Release|Any CPU
+		{49EF16A2-5ED1-480F-80A1-D1D05D6C1BE4}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
