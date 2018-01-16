@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersionAttribute(Octokit.VersionConsts.Version)]
 [assembly: ComVisibleAttribute(false)]
 
-namespace Octokit { static class VersionConsts { internal const string Version = "0.23.0.2"; } }
+namespace Octokit { static class VersionConsts { internal const string Version = "0.23.0.5"; } }
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const string Version = Octokit.VersionConsts.Version + "-ghu";

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net.Http;
+using DotNetHttp35;
 using System.Threading.Tasks;
 
 namespace Octokit

@@ -10,14 +10,14 @@
     /// </remarks>
     public class ProductHeaderValue
     {
-        readonly System.Net.Http.Headers.ProductHeaderValue _productHeaderValue;
+        readonly DotNetHttp35.Headers.ProductHeaderValue _productHeaderValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductHeaderValue"/> class.
         /// </summary>
         /// <param name="name">The name of the product that's using Octokit</param>
         public ProductHeaderValue(string name)
-            : this(new System.Net.Http.Headers.ProductHeaderValue(name))
+            : this(new DotNetHttp35.Headers.ProductHeaderValue(name))
         {
         }
 
@@ -27,11 +27,11 @@
         /// <param name="name">The name of the product that's using Octokit</param>
         /// <param name="version">The version of the product that's using Octokit</param>
         public ProductHeaderValue(string name, string version)
-            : this(new System.Net.Http.Headers.ProductHeaderValue(name, version))
+            : this(new DotNetHttp35.Headers.ProductHeaderValue(name, version))
         {
         }
 
-        ProductHeaderValue(System.Net.Http.Headers.ProductHeaderValue productHeader)
+        ProductHeaderValue(DotNetHttp35.Headers.ProductHeaderValue productHeader)
         {
             _productHeaderValue = productHeader;
         }
@@ -74,7 +74,7 @@
         /// <param name="input">The input.</param>
         public static ProductHeaderValue Parse(string input)
         {
-            return new ProductHeaderValue(System.Net.Http.Headers.ProductHeaderValue.Parse(input));
+            return new ProductHeaderValue(DotNetHttp35.Headers.ProductHeaderValue.Parse(input));
         }
 
         /// <summary>
@@ -86,8 +86,8 @@
         public static bool TryParse(string input,
             out ProductHeaderValue parsedValue)
         {
-            System.Net.Http.Headers.ProductHeaderValue value;
-            var result = System.Net.Http.Headers.ProductHeaderValue.TryParse(input, out value);
+            DotNetHttp35.Headers.ProductHeaderValue value;
+            var result = DotNetHttp35.Headers.ProductHeaderValue.TryParse(input, out value);
             parsedValue = result ? Parse(input) : null;
             return result;
         }

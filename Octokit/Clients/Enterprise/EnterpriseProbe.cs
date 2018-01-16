@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using System.Net.Http;
+using DotNetHttp35;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Octokit.Internal;

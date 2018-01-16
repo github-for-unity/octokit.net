@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using DotNetHttp35;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -163,7 +163,7 @@ namespace Octokit.Internal
                 if (bodyStream != null)
                 {
                     requestMessage.Content = new StreamContent(bodyStream);
-                    requestMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(request.ContentType);
+                    requestMessage.Content.Headers.ContentType = new DotNetHttp35.Headers.MediaTypeHeaderValue(request.ContentType);
                 }
             }
             catch (Exception)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
-using System.Net.Http;
+using DotNetHttp35;
 
 namespace Octokit.Internal
 {

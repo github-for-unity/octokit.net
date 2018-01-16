@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
+using DotNetHttp35;
 
 namespace Octokit.Internal
 {

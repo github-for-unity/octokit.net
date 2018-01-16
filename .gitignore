@@ -95,3 +95,4 @@ Backup/
 
 # .NET Core
 project.lock.json
+packages/
